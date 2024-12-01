@@ -10,7 +10,7 @@ This year's Advent of Code challenge follows an intriguing mystery: the Chief Hi
 
 ## Repository Structure
 - Each day's solutions will be organized in separate directories
-- Code will be written in [your preferred programming language]
+- Code will be written in Python
 - Includes both part 1 and part 2 solutions for each day's challenge
 
 ## Progress Tracker
