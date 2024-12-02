@@ -37,4 +37,3 @@ So, in this example, 2 reports are safe.
 
 Analyze the unusual data from the engineers. How many reports are safe?
 
-To begin, get your puzzle input.
