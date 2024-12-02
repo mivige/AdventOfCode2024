@@ -17,7 +17,7 @@ This year's Advent of Code challenge follows an intriguing mystery: the Chief Hi
 | Day | Part 1 | Part 2 | Stars |
 |-----|--------|--------|-------|
 | 1   | ✅     | ✅     | 2/2   |
-| 2   | ❌     | ❌     | 0/2   |
+| 2   | ✅     | ✅     | 2/2   |
 | 3   | ❌     | ❌     | 0/2   |
 | 4   | ❌     | ❌     | 0/2   |
 | 5   | ❌     | ❌     | 0/2   |
