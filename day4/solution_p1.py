@@ -11,35 +11,78 @@ def read_input_from_file(filename):
     
     return puzzle
 
-def check_horizontals(puzzle):
-    return
+def check_horizontals(puzzle, sequence):
+    partial = 0
 
-def check_verticals(puzzle):
-    return
+    # For horizontal checks we can evaluate each line separately
+    for l in puzzle:
+        # Check forward
+        current_sequence = 0
+        for i in range (len(l)):
+            # If the next needed character is found implement the current sequence
+            if l[i] == sequence[current_sequence]:
+                current_sequence += 1
+            else:
+                # Check for the case if the character is the first of the sequence, otherwise you could miss some cases (e.g. 'XXMAS')
+                if l[i] == sequence[0]:
+                    current_sequence = 1
+                else:
+                    current_sequence = 0
+            # If the current sequence is completed implement the partial count
+            if current_sequence == 4:
+                partial += 1
+                # Reset to 0 to start a new sequence, we don't need special checks since we're checking separately forward and backwards, so the end of a sequence can't be the start of a new one ('S' != 'X')
+                current_sequence = 0
+        
+        # Check backwards
+        current_sequence = 0
+        for i in range (1, len(l)+1):
+            if l[-i] == sequence[current_sequence]:
+                current_sequence += 1
+            else:
+                if l[-i] == sequence[0]:
+                    current_sequence = 1
+                else:
+                    current_sequence = 0
+            if current_sequence == 4:
+                partial += 1
+                current_sequence = 0
 
-def check_lr_diagonals(puzzle):
-    return
+    return partial
 
-def check_rl_diagonals(puzzle):
-    return
+def check_verticals(puzzle, sequence):
+    partial = 0
+
+    return partial
+
+def check_lr_diagonals(puzzle, sequence):
+    partial = 0
+
+    return partial
+
+def check_rl_diagonals(puzzle, sequence):
+    partial = 0
+
+    return partial
 
 def analyze(puzzle):
     result = 0
+    sequence = ['X', 'M', 'A', 'S']
 
     # Check horizontal (including backwards)
-    result += check_horizontals(puzzle)
+    result += check_horizontals(puzzle, sequence)
     # Check vertical (including backwards)
-    result += check_verticals(puzzle)
+    result += check_verticals(puzzle, sequence)
     # Check left to right diagonals (both top-down and bottom-up)
-    result += check_lr_diagonals(puzzle)
+    result += check_lr_diagonals(puzzle, sequence)
     # Check right to left diagonals (both top-down and bottom-up)
-    result += check_rl_diagonals(puzzle)
+    result += check_rl_diagonals(puzzle, sequence)
 
     return result
 
 if __name__ == "__main__":
     filename = 'day4/input.txt'
     puzzle = read_input_from_file(filename)
-    print("Puzzle input:", puzzle)
+    # print("Puzzle input:", puzzle)
     result = analyze(puzzle)
     print("Result:", result)
