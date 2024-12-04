@@ -53,6 +53,43 @@ def check_horizontals(puzzle, sequence):
 def check_verticals(puzzle, sequence):
     partial = 0
 
+    for i in range (len(puzzle)):
+        # Check forward
+        current_sequence = 0
+        for j in range (len(puzzle[0])):
+            # If the next needed character is found implement the current sequence
+            if puzzle[j][i] == sequence[current_sequence]:
+                current_sequence += 1
+            else:
+                # Check for the case if the character is the first of the sequence, otherwise you could miss some cases (e.g. 'XXMAS')
+                if puzzle[j][i] == sequence[0]:
+                    current_sequence = 1
+                else:
+                    current_sequence = 0
+            # If the current sequence is completed implement the partial count
+            if current_sequence == 4:
+                partial += 1
+                # Reset to 0 to start a new sequence, we don't need special checks since we're checking separately forward and backwards, so the end of a sequence can't be the start of a new one ('S' != 'X')
+                current_sequence = 0
+        
+        # Check backwards
+        current_sequence = 0
+        for j in range (1, len(puzzle[0])+1):
+            # If the next needed character is found implement the current sequence
+            if puzzle[-j][i] == sequence[current_sequence]:
+                current_sequence += 1
+            else:
+                # Check for the case if the character is the first of the sequence, otherwise you could miss some cases (e.g. 'XXMAS')
+                if puzzle[-j][i] == sequence[0]:
+                    current_sequence = 1
+                else:
+                    current_sequence = 0
+            # If the current sequence is completed implement the partial count
+            if current_sequence == 4:
+                partial += 1
+                # Reset to 0 to start a new sequence, we don't need special checks since we're checking separately forward and backwards, so the end of a sequence can't be the start of a new one ('S' != 'X')
+                current_sequence = 0
+
     return partial
 
 def check_lr_diagonals(puzzle, sequence):
