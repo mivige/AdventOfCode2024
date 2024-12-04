@@ -92,13 +92,38 @@ def check_verticals(puzzle, sequence):
 
     return partial
 
-def check_lr_diagonals(puzzle, sequence):
+def check_diagonals(diags, sequence):
     partial = 0
-
-    return partial
-
-def check_rl_diagonals(puzzle, sequence):
-    partial = 0
+    
+    # With the lists we created we can use thee same code as the horizontal check
+    for l in diags:
+        # Check forward
+        current_sequence = 0
+        for i in range (len(l)):
+            if l[i] == sequence[current_sequence]:
+                current_sequence += 1
+            else:
+                if l[i] == sequence[0]:
+                    current_sequence = 1
+                else:
+                    current_sequence = 0
+            if current_sequence == 4:
+                partial += 1
+                current_sequence = 0
+        
+        # Check backwards
+        current_sequence = 0
+        for i in range (1, len(l)+1):
+            if l[-i] == sequence[current_sequence]:
+                current_sequence += 1
+            else:
+                if l[-i] == sequence[0]:
+                    current_sequence = 1
+                else:
+                    current_sequence = 0
+            if current_sequence == 4:
+                partial += 1
+                current_sequence = 0
 
     return partial
 
@@ -110,10 +135,24 @@ def analyze(puzzle):
     result += check_horizontals(puzzle, sequence)
     # Check vertical (including backwards)
     result += check_verticals(puzzle, sequence)
+
+    max_row = len(puzzle)
+    max_col = len(puzzle[0])
+    
+    fdiag = [[] for _ in range(max_row + max_col - 1)]
+    bdiag = [[] for _ in range(len(fdiag))]
+    min_bdiag = -max_row + 1
+
+    # Create diagonals (bdiag -> left to right, fdiag -> right to left)
+    for x in range(max_col):
+        for y in range(max_row):
+            fdiag[x+y].append(puzzle[y][x])
+            bdiag[x-y-min_bdiag].append(puzzle[y][x])
+
     # Check left to right diagonals (both top-down and bottom-up)
-    result += check_lr_diagonals(puzzle, sequence)
+    result += check_diagonals(bdiag, sequence)
     # Check right to left diagonals (both top-down and bottom-up)
-    result += check_rl_diagonals(puzzle, sequence)
+    result += check_diagonals(fdiag, sequence)
 
     return result
 
