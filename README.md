@@ -20,7 +20,7 @@ This year's Advent of Code challenge follows an intriguing mystery: the Chief Hi
 | 2   | ✅     | ✅     | 2/2   |
 | 3   | ✅     | ✅     | 2/2   |
 | 4   | ✅     | ✅     | 2/2   |
-| 5   | ✅     | ❌     | 1/2   |
+| 5   | ✅     | ✅     | 2/2   |
 | 6   | ❌     | ❌     | 0/2   |
 | 7   | ❌     | ❌     | 0/2   |
 | 8   | ❌     | ❌     | 0/2   |
